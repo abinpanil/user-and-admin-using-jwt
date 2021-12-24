@@ -3,6 +3,12 @@ const User = require("../models/userModel");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const jwtSecret = "ouyughvbnbkjhgvcv";
+const auth = require("../middleware/userAuth");
+
+// home
+router.get("/", auth, (req, res) => {
+    res.send("home");
+});
 
 // register
 router.post("signup", async (req, res) => {
@@ -73,7 +79,7 @@ router.post("/login", async (req, res) => {
         if ( !existingUser )
             return res
                 .status(400)
-                .json({ errorMessage: "Wrong email or password" });
+                .json({ errorMessage: "User not found" });
 
         const passwordCorrect = await bcrypt.compare(password, existingUser.passwordHash);
         if( !passwordCorrect )
