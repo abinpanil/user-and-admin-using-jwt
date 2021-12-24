@@ -16,4 +16,5 @@ mongoose.connect("mongodb+srv://user:user@cluster0.sqieg.mongodb.net/MERN?retryW
  
 // set up routes
 app.use("/", require("./routers/userRouter"));
+app.use("/admin", require("./routers/adminRouter"));
 
