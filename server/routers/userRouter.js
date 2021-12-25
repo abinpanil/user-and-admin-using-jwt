@@ -2,11 +2,11 @@ const router = require("express").Router();
 const User = require("../models/userModel");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const jwtSecret = "ouyughvbnbkjhgvcv";
-const auth = require("../middleware/userAuth");
+require('dotenv').config()
+const userAuth = require("../middleware/userAuth");
 
 // home
-router.get("/", auth, (req, res) => {
+router.get("/", userAuth, (req, res) => {
     res.send("home");
 });
 
@@ -51,7 +51,7 @@ router.post("signup", async (req, res) => {
         // sign in with token
         const token = jwt.sign({
             user: saveUser._id
-        }, jwtSecret);
+        }, process.env.jwt_Secret);
 
         // sent the token in a HTTP-only cookie
         res.cookie("token", token, {
@@ -90,7 +90,7 @@ router.post("/login", async (req, res) => {
         // sign in with token
         const token = jwt.sign({
             user: existingUser._id
-        }, jwtSecret);
+        }, process.env.jwt_Secret);
 
         // sent the token in a HTTP-only cookie
         res.cookie("token", token, {
