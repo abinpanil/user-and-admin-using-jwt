@@ -11,7 +11,8 @@ router.get("/", userAuth, (req, res) => {
 });
 
 // register
-router.post("signup", async (req, res) => {
+router.post("/signup", async (req, res) => {
+    console.log(req.body);
     try {
         const { email, password, passwordVarify } = req.body;
 

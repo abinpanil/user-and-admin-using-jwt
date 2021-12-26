@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cookieParser=require("cookie-parser");
+const cors = require("cors");
 
 // setup server
 const app = express();
@@ -9,6 +10,9 @@ app.listen(process.env.PORT || PORT, () => console.log(`server started on port: 
 
 app.use(express.json());
 app.use(cookieParser());
+app.use(cors({
+    origin: ["http://localhost:3000"]
+}));
 
 // connect mongo
 mongoose.connect("mongodb+srv://user:user@cluster0.sqieg.mongodb.net/MERN?retryWrites=true&w=majority", (err) => {

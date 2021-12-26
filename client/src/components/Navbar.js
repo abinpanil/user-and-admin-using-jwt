@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import {Link} from "react-router-dom";
 
 const Container = styled.div`
     height: 60px;
@@ -27,9 +28,14 @@ const Navbar = () => {
         <Container>
             <Wrapper>
                 <Left>
-                    <Logo>NavBar</Logo>
+                    <Logo>
+                        <Link to="/">User</Link>
+                    </Logo>
                 </Left>
-                <Right>Right</Right>
+                <Right>
+                    <Link to="/signup">Signup</Link>
+                    <Link to="/login">Login</Link>
+                </Right>
             </Wrapper>
         </Container>
     )
