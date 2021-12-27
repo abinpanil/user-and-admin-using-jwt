@@ -11,7 +11,8 @@ app.listen(process.env.PORT || PORT, () => console.log(`server started on port: 
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors({
-    origin: ["http://localhost:3000"]
+    origin: ["http://localhost:3000"],
+    credentials: true
 }));
 
 // connect mongo

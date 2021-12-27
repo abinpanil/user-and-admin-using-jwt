@@ -12,7 +12,6 @@ router.get("/", userAuth, (req, res) => {
 
 // register
 router.post("/signup", async (req, res) => {
-    console.log(req.body);
     try {
         const { email, password, passwordVarify } = req.body;
 
@@ -55,7 +54,7 @@ router.post("/signup", async (req, res) => {
         }, process.env.jwt_Secret);
 
         // sent the token in a HTTP-only cookie
-        res.cookie("token", token, {
+        res.cookie("Utoken", token, {
             httpOnly: true
         }).send();
 
@@ -88,13 +87,18 @@ router.post("/login", async (req, res) => {
                 .status(400)
                 .json({ errorMessage: "Wrong password" });
 
+        if( !existingUser.isActive )
+        return res
+        .status(400)
+        .json({ errorMessage: "User blocked" });
+
         // sign in with token
         const token = jwt.sign({
             user: existingUser._id
         }, process.env.jwt_Secret);
 
         // sent the token in a HTTP-only cookie
-        res.cookie("token", token, {
+        res.cookie("Utoken", token, {
             httpOnly: true
         }).send();
 
@@ -104,9 +108,22 @@ router.post("/login", async (req, res) => {
     }
 });
 
+router.get("/loggedIn", (req, res) => {
+    try {
+        const token = req.cookies.Utoken;
+
+        if( !token )
+        return res.json(false);
+        jwt.verify(token, process.env.jwt_Secret);
+        res.send(true);
+    } catch (e) {
+        res.json(false);
+    }
+})
+
 // logout
 router.get("/logout", (req, res) => {
-    res.cookie("token", "", {
+    res.cookie("Utoken", "", {
         httpOnly: true,
         expires: new Date(0)
     }).send();

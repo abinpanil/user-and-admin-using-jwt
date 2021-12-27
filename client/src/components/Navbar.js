@@ -1,44 +1,30 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
+import AuthContext from '../context/AuthContext';
+import LogoutBtn from './LogoutBtn';
+import { Container, Navbar } from 'react-bootstrap';
 
-const Container = styled.div`
-    height: 60px;
-`
-const Wrapper = styled.div `
-    padding: 10px 20px;
-    display: flex;
-    justify-content: space-between;
-`
-const Left = styled.div`
-    flex: 1;
-`
-const Logo = styled.div`
-    font-weight: bold;
-    font-size: 25px;
-`
+const Navibar = () => {
+    const { loggedIn } = useContext(AuthContext);
 
-const Right = styled.div`
-    flex: 1;
-    text-align: end;
-`
-
-const Navbar = () => {
     return (
-        <Container>
-            <Wrapper>
-                <Left>
-                    <Logo>
-                        <Link to="/">User</Link>
-                    </Logo>
-                </Left>
-                <Right>
-                    <Link to="/signup">Signup</Link>
-                    <Link to="/login">Login</Link>
-                </Right>
-            </Wrapper>
-        </Container>
+        <Navbar>
+            <Container>
+                <Navbar.Brand href="/">User</Navbar.Brand>
+                <Navbar.Toggle />
+                <Navbar.Collapse className="justify-content-end">
+                    {
+                        loggedIn ?
+                            <LogoutBtn />
+                            :
+                            <Link to="/login">Login</Link>
+                    }
+                </Navbar.Collapse>
+            </Container>
+        </Navbar>
+
     )
 }
 
-export default Navbar
+export default Navibar

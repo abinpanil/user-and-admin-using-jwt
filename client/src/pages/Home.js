@@ -1,10 +1,22 @@
 import React from 'react'
-import Navbar from '../components/Navbar'
+import Navibar from '../components/Navbar'
+import { Col, Container, Row } from 'react-bootstrap';
 
 const Home = () => {
     return (
         <div>
-            <Navbar />
+
+            <Navibar />
+            <Container>
+                <Container fluid>
+                    <Row>
+                        <Col>
+
+                            <h1>Home</h1>
+                        </Col>
+                    </Row>
+                </Container>
+            </Container>
         </div>
     )
 }
