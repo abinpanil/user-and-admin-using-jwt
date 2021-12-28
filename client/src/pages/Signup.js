@@ -36,8 +36,8 @@ const Signup = () => {
         <div>
             <Container style={{height:'100vh'}}>
                 <Row style={{justifyContent:'center', height:'100vh', alignItems:'center'}}>
-                    <Col xs={6}>
-                        <Card style={{ justifyContent:'center' }}>
+                    <Col lg={6}>
+                    <Card style={{padding:'28px', justifyContent:'center', boxShadow: 'rgba(0, 0, 0, 0.35) 0px 5px 15px'}}>
                             <Card.Body >
                                 <Card.Title className='py-3' style={{textAlign:'center'}}>Register</Card.Title>
                                 <Form onSubmit={register}>

@@ -3,7 +3,6 @@ import axios from "axios";
 import { Link, useNavigate } from 'react-router-dom';
 import { Button, Card, Col, Container, Form, Row } from 'react-bootstrap';
 import AuthContext from '../context/AuthContext';
-
 const Login = () => {
     const {getLoggIn} = useContext(AuthContext);
     const [email, setEmail] = useState("");
@@ -31,12 +30,12 @@ const Login = () => {
     }
 
 
-    return (
+    return (    
         <div>
             <Container style={{height:'100vh'}}>
                 <Row style={{justifyContent:'center', height:'100vh', alignItems:'center'}}>
-                    <Col xs={6}>
-                        <Card style={{ justifyContent:'center' }}>
+                    <Col lg={6}>
+                        <Card style={{padding:'28px', justifyContent:'center', boxShadow: 'rgba(0, 0, 0, 0.35) 0px 5px 15px'}}>
                             <Card.Body >
                                 <Card.Title className='py-3' style={{textAlign:'center'}}>Login</Card.Title>
                                 <Form onSubmit={login}>
